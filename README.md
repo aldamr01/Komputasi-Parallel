@@ -1,6 +1,9 @@
 # Komputasi-Parallel
 Aldion's Komputasi Parallel Repository ,direktori ini berisi semua tugas terkait mata kuliah komputasi parallel.
 
+### Lisensi ?
+Program ini dibawah lisensi [WTFPL LICENSE](https://github.com/aldamr01/Komputasi-Parallel/blob/master/license.txt) . Anda bebas menyebarluaskan program ini demi kepentingan bersama , entah itu menjual , memakai , mengubah , dan lain-lain tidak ada batasan terkait hak cipta pada program ini. 
+
 ### Kontribusi ?
 Jika kalian ingin berbagi tugas dengan teman teman yang lainnya , silahkan ikuti cara ini untuk berkontribusi :
 
