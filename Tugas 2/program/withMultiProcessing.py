@@ -7,7 +7,7 @@ def SoalA():
     for i in range(0,10):
         if i%2==0:
             result.append(i)
-    print(i)  
+    print(result)  
 
 def SoalB():
     result = []
