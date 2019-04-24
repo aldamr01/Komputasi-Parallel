@@ -3,31 +3,33 @@ from multiprocessing import Process,Pipe
 import random
 import time
 
+
 def SensorDepan(depan):
-    Jdepan = random.randrange(1,100)
+    Jdepan = random.randrange(1,2000)
     depan.send(Jdepan)
     print('Jarak depan mobil : ',Jdepan,' cm')
     depan.close()
 
 def SensorBelakang(belakang):
-    Jbelakang = random.randrange(1,100)
+    Jbelakang = random.randrange(1,1000)
     belakang.send(Jbelakang)
     print('Jarak belakang mobil : ',Jbelakang,' cm')
     belakang.close()
 
 def SensorKiri(kiri):
-    Jkiri = random.randrange(1,100)
+    global Jkiri 
+    Jkiri = random.randrange(1,2000)
     kiri.send(Jkiri)
     print('Jarak kiri mobil : ',Jkiri,' cm')
     kiri.close()
 
 def SensorKanan(kanan):
-    Jkanan = random.randrange(1,100)
+    Jkanan = random.randrange(1,2000)
     kanan.send(Jkanan)
     print('Jarak kanan mobil : ',Jkanan,' cm')
     kanan.close()
 
-def TerimaSensor(depan,belakang,kiri,kanan):
+def Controller(depan,belakang,kiri,kanan):
     DP = depan.recv()
     BK = belakang.recv()
     KI = kiri.recv()
@@ -37,25 +39,25 @@ def TerimaSensor(depan,belakang,kiri,kanan):
     command(DP,BK,KI,KA)
 
 if __name__ == '__main__':
-    depanIn,depanOut = Pipe()
-    belakangIn,belakangOut = Pipe()
-    kiriIn,kiriOut = Pipe()
-    kananIn,kananOut = Pipe()
+    depanIn,depanOut        = Pipe()
+    belakangIn,belakangOut  = Pipe()
+    kiriIn,kiriOut          = Pipe()
+    kananIn,kananOut        = Pipe()
     
-    KirimSensorDepan = Process(target=SensorDepan,args=(depanIn,))
-    KirimSensorBelakang = Process(target=SensorBelakang,args=(belakangIn,))
-    KirimSensorKiri = Process(target=SensorKiri,args=(kiriIn,))
-    KirimSensorKanan = Process(target=SensorKanan,args=(kananIn,))
-    TerimaSensorSemua = Process(target=TerimaSensor,args=(depanOut,belakangOut,kiriOut,kananOut))
+    KirimSensorDepan        = Process(target=SensorDepan,args=(depanIn,))
+    KirimSensorBelakang     = Process(target=SensorBelakang,args=(belakangIn,))
+    KirimSensorKiri         = Process(target=SensorKiri,args=(kiriIn,))
+    KirimSensorKanan        = Process(target=SensorKanan,args=(kananIn,))
+    ControllerUtama         = Process(target=Controller,args=(depanOut,belakangOut,kiriOut,kananOut))
 
     KirimSensorDepan.start()
     KirimSensorBelakang.start()
     KirimSensorKiri.start()
     KirimSensorKanan.start()
-    TerimaSensorSemua.start()
+    ControllerUtama.start()
 
     KirimSensorDepan.join()
     KirimSensorBelakang.join()
     KirimSensorKiri.join()
     KirimSensorKanan.join()
-    TerimaSensorSemua.join()
+    ControllerUtama.join()
