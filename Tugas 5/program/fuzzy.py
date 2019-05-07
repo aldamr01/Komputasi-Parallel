@@ -19,48 +19,48 @@ def command(p1,p2,p3,p4,trafic):
 
     if p1 < p2 and p1 < p3 and p1 < p4 :
         if trafic == 'merah' :
-            print('Berhenti sekarang , lampu traffic lagi merah') 
+            print('Berhenti sekarang , lampu traffic lagi merah\n') 
         elif trafic == 'kuning' :
-            print('Melaju pelan-pelan , lampu traffic lagi kuning') 
+            print('Melaju pelan-pelan , lampu traffic lagi kuning\n') 
         else:
             if p1 <= 10 :
-                print('Rem sekarang , didepan ada halangan') 
+                print('Rem sekarang , didepan ada halangan\n') 
             elif p1 >= 10 and p1 < 20:
-                print('Berjalan perlahan sekarang , didepan akan ada halangan') 
+                print('Berjalan perlahan sekarang , didepan akan ada halangan\n') 
             elif p1 >= 50 :
-                print('Melaju kedepan sekarang') 
+                print('Melaju kedepan sekarang\n') 
 
     elif p2 < p1 and p2 < p3 and p2 < p4 :       
         if p2 <= 10 :
-            print('Rem sekarang , dibelakang ada halangan') 
+            print('Rem sekarang , dibelakang ada halangan\n') 
         elif p2 >= 10 and p2 < 20:
-            print('mundur perlahan sekarang , awas dibelakang akan ada halangan') 
+            print('mundur perlahan sekarang , awas dibelakang akan ada halangan\n') 
         elif p2 >= 50 :
-            print('Mundur kebelakang')
+            print('Mundur kebelakang\n')
 
     elif p3 < p1 and p3 < p2 and p3 < p4 :
         if trafic == 'merah' :
-            print('Berhenti sekarang , lampu traffic lagi merah') 
+            print('Berhenti sekarang , lampu traffic lagi merah\n') 
         elif trafic == 'kuning' :
-            print('Melaju pelan-pelan , lampu traffic lagi kuning') 
+            print('Melaju pelan-pelan , lampu traffic lagi kuning\n') 
         else:
             if p3 <= 10 :
-                print('Belok ke kanan sekarang , disamping akan menabrak') 
+                print('Belok ke kanan sekarang , disamping akan menabrak\n') 
             elif p3 >= 10 and p3 < 20:
-                print('Belok nya pelan pelan , disamping akan ada halangan') 
+                print('Belok nya pelan pelan , disamping akan ada halangan\n') 
             elif p3 >= 50 :
-                print('Silahkan belok ke kiri bebas , tidak ada halangan terdeteksi') 
+                print('Silahkan belok ke kiri bebas , tidak ada halangan terdeteksi\n') 
 
     elif p4 < p3 and p4 < p2 and p4 < p1 :
         if trafic == 'merah' :
-            print('Berhenti sekarang , lampu traffic lagi merah') 
+            print('Berhenti sekarang , lampu traffic lagi merah\n') 
         elif trafic == 'kuning' :
-            print('Melaju pelan-pelan , lampu traffic lagi kuning') 
+            print('Melaju pelan-pelan , lampu traffic lagi kuning\n') 
         else:
             if p3 <= 10 :
-                print('Belok ke kiri sekarang , disamping akan menabrak') 
+                print('Belok ke kiri sekarang , disamping akan menabrak\n') 
             elif p3 >= 10 and p3 < 20:
-                print('Belok nya pelan pelan , disamping akan ada halangan') 
+                print('Belok nya pelan pelan , disamping akan ada halangan\n') 
             elif p3 >= 50 :
-                print('Silahkan belok ke kanan bebas , tidak ada halangan terdeteksi') 
+                print('Silahkan belok ke kanan bebas , tidak ada halangan terdeteksi\n') 
     
