@@ -32,7 +32,7 @@ p3 = gaugelib.DrawGauge3(
     win,
     max_value=100.0,
     min_value= 0.0,
-    size=200,
+    size=201,
     bg_col='black',
     unit = "Km/H",bg_sel = 1)
 p3.pack()
