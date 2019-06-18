@@ -10,7 +10,7 @@ import gaugelib
 win = tk.Tk()
 a5 = PhotoImage(file="1.png")
 win.tk.call('wm', 'iconphoto', win._w, a5)
-win.title("Kimochii na")
+win.title("www tes men")
 win.geometry("500x200+0+0")
 win.resizable(width=True, height=True)
 win.configure(bg='black')
