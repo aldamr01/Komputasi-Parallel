@@ -22,7 +22,7 @@ Integerasi Maps pada program SmartCar menggunakan Multithreading
 5. [Django REST Framework](https://www.django-rest-framework.org)
 6. [Django cors-headers](https://pypi.org/project/django-cors-headers/)
 
-###Cara Menjalankan Aplikasi
+### Cara Menjalankan Aplikasi
 1. Jalankan virtual environmen untuk python terlebih dahulu pada direktori master '. env/bin/active' , untuk pengguna os bajakan silahkan lihat tutorial [ini](https://programwithus.com/learn-to-code/Pip-and-virtualenv-on-Windows/) untuk menjalankan virtual environment di os nya.
 2. Masuk ke direktori project SmartCar pada Tugas 9 'cd Tugas\ 9/program/smartcar/' .
 3. Install file 'requirements.txt' yang terdapat pada project tersebut 'pip install requirements.txt' .
