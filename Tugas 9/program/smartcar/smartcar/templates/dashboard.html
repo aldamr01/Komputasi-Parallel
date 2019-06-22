@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="https://demos.telerik.com/kendo-ui/radial-gauge/car-dashboard">
+    <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
+    <title></title>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.2.619/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.2.619/styles/kendo.material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.2.619/styles/kendo.material.mobile.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://kendo.cdn.telerik.com/2019.2.619/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2019.2.619/js/kendo.all.min.js"></script>
+    
+
+    <style>
+        body{
+            padding: 10px;
+        }
+        #mapid { height: 180px; border: 5px solid gray }
+        #gauge-container {
+            margin: 0 auto;
+            overflow: hidden;
+            width: 614px;
+            height: 324px;
+
+            background: transparent url("../content/dataviz/dashboards/car-dashboard.png") no-repeat 50% 50%;
+        }
+
+        .k-gauge {
+            float: left;
+        }
+
+        #rpm {
+            width: 142px;
+            height: 147px;
+            margin: 85px 0 0 38px;
+        }
+
+        #kmh {
+            width: 216px;
+            height: 216px;
+            margin: 57px 0 0 20px;
+        }
+
+        #fuel {
+            width: 77px;
+            height: 84px;
+
+            margin: 90px 0 0 68px;
+        }
+
+        #water-temprature {
+            width: 84px;
+            height: 80px;
+
+            margin: -7px 0 0 62px;
+        }
+    </style>
+
+</head>
+<body>
+{% load static %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div id="example">
+                        <div id="gauge-container" class="hidden-on-narrow">
+                            <div id="rpm"></div>
+                            <div id="kmh"></div>
+                            <div id="fuel"></div>
+                            <div id="water-temprature"></div>
+                        </div>
+
+                        <div class="responsive-message"></div>    
+                    </div>
+                </div>
+                <div class="row">
+                     <div id="mapid" style="width: 620px; height: 270px;"></div>
+                </div>
+            </div>                            
+            <div class="col-md-4 offset-1">                
+                <p align="center">
+                    <button class="btn btn-success">Depan Kiri<hr>
+                    30m
+                    </button>
+                    <button class="btn btn-success">Depan<hr>
+                    90m
+                    </button>
+                    <button class="btn btn-success">Depan Kanan<hr>
+                    30m
+                    </button>
+                </p>
+                <p align="center">
+                    <button class="btn btn-success">Kiri<hr>
+                    20m
+                    </button>
+                    <button class="btn btn-success">Kanan<hr>
+                    20m
+                    </button>
+                </p>
+                <p align="center">
+                    <button class="btn btn-success">Belakang<hr>
+                    50m
+                    </button>
+                </p>
+                <p align="center">
+                    <img style="padding-top:30px;max-height:230px" src="http://www.clker.com/cliparts/x/c/q/E/L/j/gray-car-top-view-90-hi.png" class="img img-responsive">                
+                </p>
+                <h4 align="center" style="color:green;border-bottom:solid 2px green">
+                    Jalan Lurus
+                </h4>                
+            </div>            
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+    <script>
+
+        var mymap = L.map('mapid').setView([51.5, -0.09], 18);
+
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYWxkYW1yMDEiLCJhIjoiY2p4NnozeHhlMDRrZDQwbW5ja3hyd3Z3eCJ9.iHKHxSxgzFdtK2HYN9vXrA', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 64,
+            id: 'mapbox.streets',
+            accessToken: 'pk.eyJ1IjoiYWxkYW1yMDEiLCJhIjoiY2p4NnozeHhlMDRrZDQwbW5ja3hyd3Z3eCJ9.iHKHxSxgzFdtK2HYN9vXrA'
+        }).addTo(mymap);
+
+        var marker = L.marker([51.5, -0.09]).addTo(mymap);
+
+        function createDashboard() {
+            $("#rpm").kendoRadialGauge({
+                theme: "black",
+
+                pointer: {
+                    value: 0,
+                    color: "#ea7001"
+                },
+
+                scale: {
+                    startAngle: -45,
+                    endAngle: 120,
+
+                    min: 0,
+                    max: 6,
+
+                    majorUnit: 1,
+                    majorTicks: {
+                        width: 1,
+                        size: 7
+                    },
+
+                    minorUnit: 0.2,
+                    minorTicks: {
+                        size: 5
+                    },
+
+                    ranges: [{
+                        from: 4,
+                        to: 5,
+                        color: "#ff7a00"
+                    }, {
+                        from: 5,
+                        to: 6,
+                        color: "#c20000"
+                    }],
+
+                    labels: {
+                        font: "11px Arial,Helvetica,sans-serif"
+                    }
+                }
+            });
+
+            $("#kmh").kendoRadialGauge({
+                theme: "black",
+
+                pointer: {
+                    value: 0,
+                    color: "#ea7001"
+                },
+
+                scale: {
+                    startAngle: -60,
+                    endAngle: 240,
+
+                    min: 0,
+                    max: 220,
+
+                    majorTicks: {
+                        width: 1,
+                        size: 14
+                    },
+                    majorUnit: 20,
+
+                    minorTicks: {
+                        size: 10
+                    },
+
+                    minorUnit: 2
+                }
+            });
+
+            $("#fuel").kendoRadialGauge({
+                theme: "black",
+
+                pointer: {
+                    value: 0.9,
+                    color: "#ea7001"
+                },
+
+                scale: {
+                    startAngle: 90,
+                    endAngle: 180,
+
+                    min: 0,
+                    max: 1,
+
+                    majorUnit: 0.5,
+                    majorTicks: {
+                        width: 2,
+                        size: 6
+                    },
+
+                    minorUnit: 0.25,
+                    minorTicks: {
+                        size: 3
+                    },
+
+                    ranges: [{
+                        from: 0,
+                        to: 0.1,
+                        color: "#c20000"
+                    }],
+
+                    labels: {
+                        font: "9px Arial,Helvetica,sans-serif"
+                    }
+                }
+            });
+
+            $("#water-temprature").kendoRadialGauge({
+                theme: "black",
+
+                pointer: {
+                    value: 90,
+                    color: "#ea7001"
+                },
+
+                scale: {
+                    startAngle: 180,
+                    endAngle: 270,
+
+                    min: 60,
+                    max: 120,
+
+                    majorUnit: 30,
+                    majorTicks: {
+                        width: 2,
+                        size: 6
+                    },
+
+                    minorUnit: 10,
+                    minorTicks: {
+                        size: 3
+                    },
+
+                    ranges: [{
+                        from: 110,
+                        to: 120,
+                        color: "#c20000"
+                    }],
+
+                    labels: {
+                        font: "9px Arial,Helvetica,sans-serif"
+                    }
+                }
+            });
+        }
+
+        var animateInterval;
+        function animateDashboard() {
+            if (animateInterval) {
+                return;
+            }
+
+            var GEARS = [0.14, 0.06, 0.035, 0.027, 0.019],
+                IDLE_RPM = 0.9,
+                CHANGE_RPM = 4,
+                CHANGE_DELAY = 400,
+                DECAY_RATE = 0.0017,
+                TOP_SPEED = 210,
+                ACCELERATION = 0.6,
+                INTERVAL = 50;
+
+            var speed = 0,
+                skip = 0,
+                ratio,
+                gear = 0;
+
+            function update() {
+                $("#rpm").data("kendoRadialGauge").value(GEARS[gear] * speed + IDLE_RPM);
+                $("#kmh").data("kendoRadialGauge").value(speed);
+            }
+
+            animateInterval = setInterval(function() {
+                if(speed < TOP_SPEED) {
+                    if (GEARS[gear] * speed > CHANGE_RPM && gear < GEARS.length) {
+                        gear++;
+                        skip = CHANGE_DELAY / INTERVAL;
+                        update();
+                    }
+
+                    if (skip-- < 0) {
+                        speed += ACCELERATION - (DECAY_RATE * speed);
+                        update();
+                    }
+                } else {
+                    skip = 100;
+                    speed = 0;
+                    gear = 0;
+                }
+            }, INTERVAL);
+        }
+
+        $(document).ready(function() {
+            animateInterval = null;
+
+            createDashboard();
+            animateDashboard();
+
+            $(document).bind("kendo:skinChange", function(e) {
+                createDashboard();
+            });
+
+            $(document).bind("kendo:pageUnload", function(e) {
+                clearInterval(animateInterval);
+            });
+        });
+    </script>
+</body>
+</html>
