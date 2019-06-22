@@ -23,11 +23,11 @@ Integerasi Maps pada program SmartCar menggunakan Multithreading
 6. [Django cors-headers](https://pypi.org/project/django-cors-headers/)
 
 ### Cara Menjalankan Aplikasi
-1. Jalankan virtual environmen untuk python terlebih dahulu pada direktori master '. env/bin/active' , untuk pengguna os bajakan silahkan lihat tutorial [ini](https://programwithus.com/learn-to-code/Pip-and-virtualenv-on-Windows/) untuk menjalankan virtual environment di os nya.
-2. Masuk ke direktori project SmartCar pada Tugas 9 'cd Tugas\ 9/program/smartcar/' .
-3. Install file 'requirements.txt' yang terdapat pada project tersebut 'pip install requirements.txt' .
-4. Bila tidak terdapat eror, Jalankan programnya dengan 'python manage.py runserver' pada direktori project.
-5. silahkan buka web browser dan ketikan alamat 'localhost:8000'.
+1. Jalankan virtual environmen untuk python terlebih dahulu pada direktori master `. env/bin/active` , untuk pengguna os bajakan silahkan lihat tutorial [ini](https://programwithus.com/learn-to-code/Pip-and-virtualenv-on-Windows/) untuk menjalankan virtual environment di os nya.
+2. Masuk ke direktori project SmartCar pada Tugas 9 `cd Tugas\ 9/program/smartcar/` .
+3. Install file `requirements.txt` yang terdapat pada project tersebut `pip install requirements.txt` .
+4. Bila tidak terdapat eror, Jalankan programnya dengan `python manage.py runserver` pada direktori project.
+5. silahkan buka web browser dan ketikan alamat `localhost:8000`.
 6. Happy Enjoy.
 
 Aplikasi ini dibuat guna memenuhi syarat EAS Mata Kuliah Komputasi Parallel
