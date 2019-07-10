@@ -7,8 +7,8 @@
 # Q303: AC Mati, Lampu Mati, LCD Mati, Kosong, Kuliah Kosong
 # dll
 
-# EAS Komputasi Paralel Klas:A =======================
-# NBI: 1461600243            Nama: Ilham Zaky Dhiya Ulhaq
+# EAS Komputasi Paralel Klas:S =======================
+# NBI: 1461600045           Nama: Bagus Setyo Budi
 #-----------------------------------------------------
 import time
 from threading import Thread
@@ -89,12 +89,15 @@ def BacaJamRuang(output_queu):
         output_queu.put(data)
         time.sleep(1)
 
-# Aturan dan Data Aktifitas Kantor adalah sbb;
+#Aturan dan Data Aktifitas Kantor adalah sbb;
 # Sumulasi jam akan berjalan dari 1 sd 24.
 # Q307 beroperasi sesuai jam kantor Senin sd Jumat pk.7.00 sd 21.00
 # Setiap ada jadwal kuliah LCD pasti menyala, dan dimatikan selesai kuliah
+# Lampu kelas dan AC akan dimatikan jika tidak ada mahasiswa didalamnya
 # Q301 sd Q306 digunakan sesuai Jadwal kuliah dengan efisien dg simulasi sbb
-# Jadwal=[['Q302',7,9],['Q305',8,11],['Q306',10,12] ]
+# Jadwal=[[‘Q307’,7,21],  ['Q302',7,9,1,1],  ['Q305',8,11,1,0],  ['Q306',10,12,1,0], [‘Q303’, 11.13 ,1,1]]
+# Contoh Q305: ada jadwal kuliah pk 8 sd 11, 1:ada mhs, Kuliah kosong
+
 
 jam = 1
 data = [None, None, None, None]
@@ -116,7 +119,9 @@ def MasterControl(input_queu):
         if None in data:
             continue
         
-        print("===== Jam ", jam, " =====", sep="")
+        print(" ")
+        print("##      Jam ", jam, "      ##", sep="")
+        print(" ")
         for i in range(len(data[0])):
             suhuRuang = data[0][i]
             suhuTubuh = data[1][i]
@@ -127,212 +132,342 @@ def MasterControl(input_queu):
             # for j in range(len(jadwal)):
             if ruang == "Q302" and jamRuang == 7 :
                 if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q302 : ", " AC Mati, Ada Orang, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q302 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
                 elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q302 : ", " AC Mati, Ada Orang, Ada Kuliah, LCD Mati, Lampu Mati.")
-                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q302 : ", " AC Mati, Kosong, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q302 : ", " AC Mati, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
                 elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q302 : ", " AC Menyala, Ada Orang, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q302 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
                 elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q302 : ", " AC Menyala, Ada Orang, Ada Kuliah, LCD Mati, Lampu Mati.")
-                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q302 : ", " AC Menyala, Kosong, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q302 : ", " AC Menyala, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
+            elif ruang == "Q302" and jamRuang == 8 :
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q302 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q302 : ", " AC Mati, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q302 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q302 : ", " AC Menyala, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
             elif ruang == "Q302" and jamRuang == 9 :
                 if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q302 : ", " AC Mati, Ada Orang, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q302 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
                 elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q302 : ", " AC Mati, Ada Orang, Ada Kuliah, LCD Mati, Lampu Mati.")
-                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q302 : ", " AC Mati, Kosong, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q302 : ", " AC Mati, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
                 elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q302 : ", " AC Menyala, Ada Orang, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q302 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
                 elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q302 : ", " AC Menyala, Ada Orang, Ada Kuliah, LCD Mati, Lampu Mati.")
-                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q302 : ", " AC Menyala, Kosong, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q302 : ", " AC Menyala, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
+            elif ruang == "Q303" and jamRuang == 11 :
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q303 : ", " AC Mati, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q303 : ", " AC Menyala, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+            elif ruang == "Q303" and jamRuang == 12 :
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q303 : ", " AC Mati, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q303 : ", " AC Menyala, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+            elif ruang == "Q303" and jamRuang == 13 :
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q303 : ", " AC Mati, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q303 : ", " AC Menyala, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
             elif ruang == "Q305" and jamRuang == 8 : 
                 if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q305 : ", " AC Mati, Ada Orang, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q305 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
                 elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q305 : ", " AC Mati, Ada Orang, Ada Kuliah, LCD Mati, Lampu Mati.")
-                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q305 : ", " AC Mati, Kosong, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q305 : ", " AC Mati, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
                 elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q305 : ", " AC Menyala, Ada Orang, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q305 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
                 elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q305 : ", " AC Menyala, Ada Orang, Ada Kuliah, LCD Mati, Lampu Mati.")
-                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q305 : ", " AC Menyala, Kosong, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q305 : ", " AC Menyala, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+            elif ruang == "Q305" and jamRuang == 9 : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q305 : ", " AC Mati, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q305 : ", " AC Menyala, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+            elif ruang == "Q305" and jamRuang == 10 : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q305 : ", " AC Mati, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q305 : ", " AC Menyala, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
             elif ruang == "Q305" and jamRuang == 11 : 
                 if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q305 : ", " AC Mati, Ada Orang, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q305 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
                 elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q305 : ", " AC Mati, Ada Orang, Ada Kuliah, LCD Mati, Lampu Mati.")
-                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q305 : ", " AC Mati, Kosong, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q305 : ", " AC Mati, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
                 elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q305 : ", " AC Menyala, Ada Orang, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q305 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
                 elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q305 : ", " AC Menyala, Ada Orang, Ada Kuliah, LCD Mati, Lampu Mati.")
-                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q305 : ", " AC Menyala, Kosong, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q305 : ", " AC Menyala, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
             elif ruang == "Q306" and jamRuang == 10 : 
                 if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q306 : ", " AC Mati, Ada Orang, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q306 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
                 elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q306 : ", " AC Mati, Ada Orang, Ada Kuliah, LCD Mati, Lampu Mati.")
-                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q306 : ", " AC Mati, Kosong, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q306 : ", " AC Mati, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
                 elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q306 : ", " AC Menyala, Ada Orang, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q306 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
                 elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q306 : ", " AC Menyala, Ada Orang, Ada Kuliah, LCD Mati, Lampu Mati.")
-                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q306 : ", " AC Menyala, Kosong, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q306 : ", " AC Menyala, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
+            elif ruang == "Q306" and jamRuang == 11 : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q306 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q306 : ", " AC Mati, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q306 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q306 : ", " AC Menyala, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
             elif ruang == "Q306" and jamRuang == 12 : 
                 if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q306 : ", " AC Mati, Ada Orang, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q306 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
                 elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q306 : ", " AC Mati, Ada Orang, Ada Kuliah, LCD Mati, Lampu Mati.")
-                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q306 : ", " AC Mati, Kosong, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q306 : ", " AC Mati, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
                 elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q306 : ", " AC Menyala, Ada Orang, Ada Kuliah, LCD Nyala, Lampu Nyala.")
+                    print ("Q306 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
                 elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q306 : ", " AC Menyala, Ada Orang, Ada Kuliah, LCD Mati, Lampu Mati.")
-                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q306 : ", " AC Menyala, Kosong, Ada Kuliah, LCD Nyala, Lampu Nyala.")
-            elif ruang == "Q301" : 
-                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q301 : ", " AC Mati, Ada Orang, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q301 : ", " AC Mati, Ada Orang, Kuliah Kosong, LCD Mati, Lampu Mati.")
-                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q301 : ", " AC Mati, Kosong, Kuliah Kosong, LCD Nyala Lampu, Nyala.")
-                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q301 : ", " AC Menyala, Ada Orang, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q301 : ", " AC Menyala, Ada Orang,  Kuliah Kosong, LCD Mati, Lampu Mati.")
-                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q301 : ", " AC Menyala, Kosong, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-            elif ruang == "Q302" and jamRuang is not 7 : 
-                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q302 : ", " AC Mati, Ada Orang, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q302 : ", " AC Mati, Ada Orang, Kuliah Kosong, LCD Mati, Lampu Mati.")
-                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q302 : ", " AC Mati, Kosong, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q302 : ", " AC Menyala, Ada Orang, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q302 : ", " AC Menyala, Ada Orang, Kuliah Kosong, LCD Mati, Lampu Mati.")
-                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q302 : ", " AC Menyala, Kosong, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-            elif ruang == "Q302" and jamRuang is not 9 : 
-                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q302 : ", " AC Mati, Ada Orang, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q302 : ", " AC Mati, Ada Orang, Kuliah Kosong, LCD Mati, Lampu Mati.")
-                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q302 : ", " AC Mati, Kosong, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q302 : ", " AC Menyala, Ada Orang, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q302 : ", " AC Menyala, Ada Orang, Kuliah Kosong, LCD Mati, Lampu Mati.")
-                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q302 : ", " AC Menyala, Kosong, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-            elif ruang == "Q303" : 
-                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q303 : ", " AC Mati, Ada Orang, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q303 : ", " AC Mati, Ada Orang, Kuliah Kosong, LCD Mati, Lampu Mati.")
-                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q303 : ", " AC Mati, Kosong, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q303 : ", " AC Menyala, Ada Orang, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q303 : ", " AC Menyala, Ada Orang, Kuliah Kosong, LCD Mati, Lampu Mati.")
-                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q303 : ", " AC Menyala, Kosong, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-            elif ruang == "Q304" : 
-                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q304 : ", " AC Mati, Ada Orang, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q304 : ", " AC Mati, Ada Orang, Kuliah Kosong, LCD Nyala, Lampu Mati.")
-                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q304 : ", " AC Mati, Kosong, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q304 : ", " AC Menyala, Ada Orang, Kuliah Kosong, LCD Nyala Lampu Nyala.")
-                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q304 : ", " AC Menyala, Ada Orang, Kuliah Kosong, LCD Mati, Lampu Mati.")
-                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q304 : ", " AC Menyala, Kosong, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-            elif ruang == "Q305" and jamRuang is not 8 : 
-                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q305 : ", " AC Mati, Ada Orang, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q305 : ", " AC Mati, Ada Orang, Kuliah Kosong, LCD Mati, Lampu Mati.")
-                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q305 : ", " AC Mati, Kosong, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q305 : ", " AC Menyala, Ada Orang, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q305 : ", " AC Menyala, Ada Orang, Kuliah Kosong, LCD Mati, Lampu Mati.")
-                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q305 : ", " AC Menyala, Kosong, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-            elif ruang == "Q305" and jamRuang is not 11 : 
-                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q305 : ", " AC Mati, Ada Orang, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q305 : ", " AC Mati, Ada Orang, Kuliah Kosong, LCD Mati, Lampu Mati.")
-                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q306 : ", " AC Mati, Kosong, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q305 : ", " AC Menyala, Ada Orang, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q305 : ", " AC Menyala, Ada Orang, Kuliah Kosong, LCD Mati, Lampu Mati.")
-                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q305 : ", " AC Menyala, Kosong, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-            elif ruang == "Q306" and jamRuang is not 10 : 
-                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q306 : ", " AC Mati, Ada Orang, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q306 : ", " AC Mati, Ada Orang, Kuliah Kosong, LCD Mati, Lampu Mati.")
-                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q306 : ", " AC Mati, Kosong, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q306 : ", " AC Menyala, Ada Orang, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q306 : ", " AC Menyala, Ada Orang, Kuliah Kosong, LCD Mati, Lampu Mati.")
-                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q306 : ", " AC Menyala, Kosong, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-            elif ruang == "Q306" and jamRuang is not 12 : 
-                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q306 : ", " AC Mati, Ada Orang, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q306 : ", " AC Mati, Ada Orang, Kuliah Kosong, LCD Mati, Lampu Mati.")
-                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q306 : ", " AC Mati, Kosong, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q306 : ", " AC Menyala, Ada Orang, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
-                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q306 : ", " AC Menyala, Ada Orang, Kuliah Kosong, LCD Mati, Lampu Mati.")
-                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q306 : ", " AC Menyala, Kosong, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
+                    print ("Q306 : ", " AC Menyala, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Ada Kuliah.")
             elif ruang == "Q307" : 
                 if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q307 : ", " AC Mati, Ada Orang, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
+                    print ("Q307 : ", " AC Mati, Lampu Nyala, Ada Orang, Masih Dalam Jam Kerja.")
                 elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q307 : ", " AC Mati, Ada Orang, Kuliah Kosong, LCD Mati, Lampu Mati.")
+                    print ("Q307 : ", " AC Mati, Lampu Mati, Ada Orang, Masih Dalam Jam Kerja.")
                 elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q307 : ", " AC Mati, Kosong,Kuliah Kosong, LCD Nyala, Lampu Nyala.")
+                    print ("Q307 : ", " AC Mati, Lampu Nyala, Kosong, Masih Dalam Jam Kerja.")
                 elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
-                    print ("Q307 : ", " AC Menyala, Ada Orang,Kuliah Kosong, LCD Nyala, Lampu Nyala.")
+                    print ("Q307 : ", " AC Menyala, Lampu Nyala, Ada Orang, Masih Dalam Jam Kerja.")
                 elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
-                    print ("Q307 : ", " AC Menyala, Ada Orang, Kuliah Kosong, LCD Mati, Lampu Mati.")
+                    print ("Q307 : ", " AC Menyala, Lampu Mati, Ada Orang, Masih Dalam Jam Kerja.")
                 elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
-                    print ("Q307 : ", " AC Menyala, Kosong, Kuliah Kosong, LCD Nyala, Lampu Nyala.")
+                    print ("Q307 : ", " AC Menyala, Lampu Nyala, Kosong, Masih Dalam Jam Kerja.")
+            elif ruang == "Q301" : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q301 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q301 : ", " AC Mati, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q301 : ", " AC Mati, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q301 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q301 : ", " AC Menyala, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q301 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+            elif ruang == "Q302" and jamRuang is not 7 : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q302 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q302 : ", " AC Mati, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q302 : ", " AC Mati, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q302 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q302 : ", " AC Menyala, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q302 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+            elif ruang == "Q302" and jamRuang is not 8 : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q302 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q302 : ", " AC Mati, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q302 : ", " AC Mati, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q302 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q302 : ", " AC Menyala, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q302 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+            elif ruang == "Q302" and jamRuang is not 9 : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q302 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q302 : ", " AC Mati, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q302 : ", " AC Mati, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q302 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q302 : ", " AC Menyala, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q302 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+            elif ruang == "Q303" and jamRuang is not 11 : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q303 : ", " AC Mati, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Mati, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q303 : ", " AC Menyala, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+            elif ruang == "Q303" and jamRuang is not 13 : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q303 : ", " AC Mati, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Mati, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q303 : ", " AC Menyala, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+            elif ruang == "Q303" and jamRuang is not 14 : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q303 : ", " AC Mati, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Mati, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q303 : ", " AC Menyala, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+            elif ruang == "Q304" : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q304 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q304 : ", " AC Mati, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q304 : ", " AC Mati, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q304 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q304 : ", " AC Menyala, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q304 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+            elif ruang == "Q305" and jamRuang is not 8 : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q305 : ", " AC Mati, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Mati, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q305 : ", " AC Menyala, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+            elif ruang == "Q305" and jamRuang is not 9 : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q305 : ", " AC Mati, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Mati, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q305 : ", " AC Menyala, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+            elif ruang == "Q305" and jamRuang is not 11 : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q305 : ", " AC Mati, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Mati, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q305 : ", " AC Menyala, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+            elif ruang == "Q305" and jamRuang is not 11 : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q305 : ", " AC Mati, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Mati, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q305 : ", " AC Menyala, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+            elif ruang == "Q306" and jamRuang is not 10 : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q306 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q306 : ", " AC Mati, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q306 : ", " AC Mati, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q306 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q306 : ", " AC Menyala, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q306 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+            elif ruang == "Q306" and jamRuang is not 11 : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q306 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q306 : ", " AC Mati, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q306 : ", " AC Mati, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q306 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q306 : ", " AC Menyala, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q306 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+            elif ruang == "Q306" and jamRuang is not 12 : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q306 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q306 : ", " AC Mati, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q306 : ", " AC Mati, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q306 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q306 : ", " AC Menyala, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q306 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+            elif ruang == "Q307" : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Mati, Lampu Nyala, Ada Orang, Diluar Jam Kantor.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q303 : ", " AC Mati, Lampu Mati, Ada Orang, Diluar Jam Kantor.")
+                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Mati, Lampu Nyala, Kosong, Diluar Jam Kantor.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Menyala, Lampu Nyala, Ada Orang, Diluar Jam Kantor.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q303 : ", " AC Menyala, Lampu Mati, Ada Orang, Diluar Jam Kantor.")
+                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q303 : ", " AC Menyala, Lampu Nyala, Kosong, Diluar Jam Kantor.")
 
         data = [None, None, None, None]
         jam = jam%24+1
@@ -359,4 +494,4 @@ if __name__ == "__main__":
     t2.start()
     t3.start()
     t4.start()
-    t5.start()
+t5.start()
