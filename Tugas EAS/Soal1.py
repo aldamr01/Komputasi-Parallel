@@ -99,6 +99,13 @@ def BacaJamRuang(output_queu):
 # Contoh Q305: ada jadwal kuliah pk 8 sd 11, 1:ada mhs, Kuliah kosong
 
 
+# Mahasiswa Informatika sangat antusias dan penuh semangat sehingga setiap ada ruang selalu 
+# digunakan untuk kegiatan akademis seperti keminitas Pytho, DSI, Robot, C++, dll sehingga mereka #memiliki jadwal sendiri-sendiri yang terintegrasi. 
+# Dalam hal ini disimulasikan sbb;
+# JadwalMhs=[ [‘Q305’,11,13, 1], [‘Q304’, 10.13, 0] ]
+# Contoh: diruang Q304 mulai pk 10 sd 13 rencana ada kegiatan mhs akan tetapi tidak ada mhsnya
+
+
 jam = 1
 data = [None, None, None, None]
 
@@ -212,6 +219,24 @@ def MasterControl(input_queu):
                 elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
                     print ("Q305 : ", " AC Menyala, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
             elif ruang == "Q305" and jamRuang == 11 : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q305 : ", " AC Mati, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q305 : ", " AC Menyala, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+            elif ruang == "Q305" and jamRuang == 12 : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q305 : ", " AC Mati, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q305 : ", " AC Menyala, Lampu Mati, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
+            elif ruang == "Q305" and jamRuang == 13 : 
                 if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
                     print ("Q305 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Ada Mahasiswa, Kosong.")
                 elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
@@ -390,7 +415,7 @@ def MasterControl(input_queu):
                     print ("Q305 : ", " AC Menyala, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
                 elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
                     print ("Q305 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
-            elif ruang == "Q305" and jamRuang is not 11 : 
+            elif ruang == "Q305" and jamRuang is not 10 : 
                 if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
                     print ("Q305 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
                 elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
@@ -404,6 +429,32 @@ def MasterControl(input_queu):
                 elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
                     print ("Q305 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
             elif ruang == "Q305" and jamRuang is not 11 : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q305 : ", " AC Mati, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Mati, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q305 : ", " AC Menyala, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+            elif ruang == "Q305" and jamRuang is not 12 : 
+                if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q305 : ", " AC Mati, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang >= 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Mati, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 25 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
+                    print ("Q305 : ", " AC Menyala, Lampu Mati, LCD Mati, Ada Orang, Kuliah Kosong.")
+                elif suhuRuang < 28 and suhuTubuh < 33.2 and luminasiRuang >= 500 :
+                    print ("Q305 : ", " AC Menyala, Lampu Nyala, LCD Nyala, Kosong, Kuliah Kosong.")
+            elif ruang == "Q305" and jamRuang is not 13 : 
                 if suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang >= 500 :
                     print ("Q305 : ", " AC Mati, Lampu Nyala, LCD Nyala, Ada Orang, Kuliah Kosong.")
                 elif suhuRuang >= 28 and suhuTubuh >= 38.2 and luminasiRuang < 320 :
@@ -494,4 +545,4 @@ if __name__ == "__main__":
     t2.start()
     t3.start()
     t4.start()
-t5.start()
+    t5.start()
